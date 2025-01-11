@@ -1,7 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx/components/main_controller.dart';
+import 'package:getx/controller/main_controller.dart';
 import 'package:getx/router/router_info.dart';
 
 class MainScreen extends GetView<MainController> {
@@ -11,11 +11,16 @@ class MainScreen extends GetView<MainController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.white,
+          titleTextStyle: TextStyle(color: Colors.red),
+          centerTitle: false,
           title: Obx(
             () => Text(
               controller.title.value,
+              textAlign: TextAlign.right,
             ),
           ),
+          actions: [TextButton(onPressed: () {}, child: Icon(Icons.menu))],
         ),
         body: SafeArea(
           child: PageTransitionSwitcher(

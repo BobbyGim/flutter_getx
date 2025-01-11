@@ -1,12 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:getx/components/loading_widget.dart';
+import 'package:getx/controller/post_controller.dart';
 
-class PostScreen extends StatelessWidget {
+class PostScreen extends GetView<PostController> {
   const PostScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.pink,
+    return Scaffold(
+      body: SafeArea(
+        child: Stack(
+          children: [
+            _posts(),
+            Obx(() => LoadingWidget(
+                  isViaible: controller.isLoading.value,
+                ))
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _posts() {
+    return ListView.separated(
+      itemCount: controller.posts.length,
+      itemBuilder: (BuildContext context, int idx) {
+        return ListTile(
+          leading: Icon(Icons.article_outlined),
+          title: Text(
+            controller.posts[idx].title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+        );
+      },
+      separatorBuilder: (BuildContext context, int idx) {
+        return Divider();
+      },
     );
   }
 }
