@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx/components/loading_widget.dart';
 import 'package:getx/controller/photo_controller.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 class PhotoScreen extends GetView<PhotoController> {
   const PhotoScreen({super.key});
@@ -32,30 +33,39 @@ class PhotoScreen extends GetView<PhotoController> {
   }
 
   Widget _photos() {
-    return Obx(
-      () => GridView.builder(
-        shrinkWrap: true,
-        padding: const EdgeInsets.all(10),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-        ),
-        itemCount: controller.photos.length,
-        itemBuilder: (BuildContext context, int idx) {
-          return InkWell(
-            child: Card(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Image.network(
-                  controller.photos[idx].downloadUrl,
-                  fit: BoxFit.cover,
+    return LiquidPullToRefresh(
+      color: Colors.grey.withOpacity(0.2),
+      backgroundColor: Colors.white,
+      showChildOpacityTransition: false,
+      springAnimationDurationInMilliseconds: 300,
+      onRefresh: () async {
+        controller.onRefresh();
+      },
+      child: Obx(
+        () => GridView.builder(
+          shrinkWrap: true,
+          padding: const EdgeInsets.all(10),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+          ),
+          itemCount: controller.photos.length,
+          itemBuilder: (BuildContext context, int idx) {
+            return InkWell(
+              child: Card(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image.network(
+                    controller.photos[idx].downloadUrl,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
-            onTap: () {
-              controller.showPhoto(idx);
-            },
-          );
-        },
+              onTap: () {
+                controller.showPhoto(idx);
+              },
+            );
+          },
+        ),
       ),
     );
   }

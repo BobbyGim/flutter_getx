@@ -15,6 +15,10 @@ class PhotoController extends GetxController {
     super.onInit();
   }
 
+  void onRefresh() {
+    _getPhotos();
+  }
+
   Future<void> _getPhotos() async {
     isLoading(true);
 

@@ -1,6 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx/components/draw_widget.dart';
 import 'package:getx/controller/main_controller.dart';
 import 'package:getx/router/router_info.dart';
 
@@ -20,8 +21,8 @@ class MainScreen extends GetView<MainController> {
               textAlign: TextAlign.right,
             ),
           ),
-          actions: [TextButton(onPressed: () {}, child: Icon(Icons.menu))],
         ),
+        endDrawer: DrawWidget(),
         body: SafeArea(
           child: PageTransitionSwitcher(
             transitionBuilder: (Widget child, Animation<double> anim,

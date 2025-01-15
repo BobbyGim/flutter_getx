@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx/common/const.dart';
 import 'package:getx/components/loading_widget.dart';
 import 'package:getx/controller/home_controller.dart';
 
@@ -15,9 +16,9 @@ class HomeScreen extends GetView<HomeController> {
             Column(
               children: [
                 Card(
-                  margin: EdgeInsets.all(16),
+                  margin: EdgeInsets.all(gMargin),
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(gPadding),
                     child: Row(
                       children: [
                         Image.asset(
