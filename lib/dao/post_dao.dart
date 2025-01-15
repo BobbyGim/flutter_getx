@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/request/request.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
@@ -31,14 +29,13 @@ class PostDao extends GetConnect {
   Future<Map<String, dynamic>> getPosts() async {
     Map<String, dynamic> resultMap = <String, dynamic>{};
     CodeInfo code = CodeInfo.ok;
-    List<PostBean> list = [];
+    List<PostDTO> list = [];
 
     try {
       final Response res = await get("/posts");
 
       if (res.statusCode == HttpStatus.ok) {
-        list =
-            res.body.map<PostBean>((json) => PostBean.fromJson(json)).toList();
+        list = res.body.map<PostDTO>((json) => PostDTO.fromJson(json)).toList();
       } else {
         code = CodeInfo.err;
       }
@@ -49,6 +46,30 @@ class PostDao extends GetConnect {
     resultMap["code"] = code;
 
     resultMap["list"] = list;
+
+    return resultMap;
+  }
+
+  Future<Map<String, dynamic>> getDetailPost(int id) async {
+    Map<String, dynamic> resultMap = <String, dynamic>{};
+
+    CodeInfo code = CodeInfo.ok;
+    PostDTO dto = PostDTO();
+
+    try {
+      final Response res = await get("/posts/$id");
+
+      if (res.statusCode == HttpStatus.ok) {
+        dto = PostDTO.fromJson(res.body);
+      } else {
+        code = CodeInfo.err;
+      }
+    } catch (err) {
+      code = CodeInfo.err;
+    }
+
+    resultMap["code"] = code;
+    resultMap["dto"] = dto;
 
     return resultMap;
   }

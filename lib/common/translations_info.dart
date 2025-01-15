@@ -9,9 +9,13 @@ class TranslationsInfo extends Translations {
       };
 
   final Map<String, String> enUS = {
+    "err.title.info": "Info",
+    "err.title.error": "error",
+    "err.try": "Please Try Again",
     "title": "Flutter GetX",
     'posts.title': "Post",
     'photo.title': "photo",
+    "post.detail.title": "Post Detail",
     "navBar.home": "Home",
     "navBar.post": "Post",
     "navBar.photo": "Photo",
@@ -23,9 +27,13 @@ class TranslationsInfo extends Translations {
   };
 
   final Map<String, String> ko = {
+    "err.title.info": "안내",
+    "err.title.error": "에러",
+    "err.try": "다시 시도해 주세요.",
     "title": "플러터 GetX",
     'posts.title': "포스트",
     'photo.title': "사진첩",
+    "post.detail.title": "포스트 상세 보기",
     "navBar.home": "홈",
     "navBar.post": "포스트",
     "navBar.photo": "사진",

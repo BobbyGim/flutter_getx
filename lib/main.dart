@@ -8,7 +8,7 @@ import 'package:getx/router/router_info.dart';
 void main() {
   runApp(
     GetMaterialApp(
-      initialRoute: RouterInfo.home,
+      initialRoute: RouterInfo.Home,
       initialBinding: InitBind(),
       getPages: RouterInfo.pages,
       defaultTransition: Transition.cupertino,

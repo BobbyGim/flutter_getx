@@ -26,13 +26,18 @@ class PostScreen extends GetView<PostController> {
     return ListView.separated(
       itemCount: controller.posts.length,
       itemBuilder: (BuildContext context, int idx) {
-        return ListTile(
-          leading: Icon(Icons.article_outlined),
-          title: Text(
-            controller.posts[idx].title,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
+        return InkWell(
+          child: ListTile(
+            leading: Icon(Icons.article_outlined),
+            title: Text(
+              controller.posts[idx].title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
+          onTap: () {
+            controller.toPostDetail(controller.posts[idx].id);
+          },
         );
       },
       separatorBuilder: (BuildContext context, int idx) {
